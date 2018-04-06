@@ -1,0 +1,21 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "poisomTab",
+  "main": "backend_server.js",
+  "config" : { "port" : "1337" },
+   "scripts" : { "start" : "node backend_server.js" },
+  "dependencies": {
+    "package-json": "^4.0.1",
+    "websocket": "^1.0.25"
+  },
+  "devDependencies": {},
+
+  "keywords": [
+    "node",
+    "modules",
+    "npm"
+  ],
+  "author": "Alex",
+  "license": "UNLICENSED"
+}
